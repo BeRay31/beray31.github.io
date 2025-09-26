@@ -33,6 +33,9 @@
             background-color: #f0f4f8;
             border-left: 4px solid #3b82f6;
         }
+        .regenerate-icon svg {
+            stroke: currentColor;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -47,24 +50,36 @@
 
         <!-- Generator Card -->
         <div class="bg-white rounded-2xl p-6 md:p-8 mb-8 md:mb-12 card">
-            <h2 class="text-2xl font-semibold text-center mb-6">Today's Outfit Palette</h2>
+             <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-left">Today's Outfit Palette</h2>
+                <span id="outfit-style-tag" class="font-semibold text-sm uppercase tracking-wider bg-gray-200 text-gray-700 px-3 py-1 rounded-full"></span>
+            </div>
             
             <!-- Color Display Section -->
             <div id="palette-display" class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-white text-center mb-6">
                 <!-- Outerwear -->
-                <div id="outerwear-card" class="color-block rounded-xl p-6 flex flex-col justify-center items-center min-h-[160px]">
+                <div id="outerwear-card" onclick="regenerateCard('outerwear')" class="color-block rounded-xl p-6 flex flex-col justify-center items-center min-h-[160px] relative cursor-pointer group">
+                    <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-70 transition-opacity regenerate-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6"/><path d="M21 12A9 9 0 0 1 6 20.4L3 22"/><path d="M21 22v-6h-6"/><path d="M3 12a9 9 0 0 1 15-8.4L21 2"/></svg>
+                    </div>
                     <span class="text-sm font-medium uppercase tracking-wider opacity-80">Outerwear</span>
                     <span id="outerwear-color-name" class="text-2xl font-bold mt-1">-</span>
                     <span id="outerwear-type-name" class="text-md font-medium mt-1 opacity-90">-</span>
                 </div>
                 <!-- Innerwear -->
-                <div id="innerwear-card" class="color-block rounded-xl p-6 flex flex-col justify-center items-center min-h-[160px]">
+                <div id="innerwear-card" onclick="regenerateCard('innerwear')" class="color-block rounded-xl p-6 flex flex-col justify-center items-center min-h-[160px] relative cursor-pointer group">
+                     <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-70 transition-opacity regenerate-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6"/><path d="M21 12A9 9 0 0 1 6 20.4L3 22"/><path d="M21 22v-6h-6"/><path d="M3 12a9 9 0 0 1 15-8.4L21 2"/></svg>
+                    </div>
                     <span class="text-sm font-medium uppercase tracking-wider opacity-80">Innerwear</span>
                     <span id="innerwear-color-name" class="text-2xl font-bold mt-1">-</span>
                      <span id="innerwear-type-name" class="text-md font-medium mt-1 opacity-90">-</span>
                 </div>
                 <!-- Pants -->
-                <div id="pants-card" class="color-block rounded-xl p-6 flex flex-col justify-center items-center min-h-[160px]">
+                <div id="pants-card" onclick="regenerateCard('pants')" class="color-block rounded-xl p-6 flex flex-col justify-center items-center min-h-[160px] relative cursor-pointer group">
+                     <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-70 transition-opacity regenerate-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6"/><path d="M21 12A9 9 0 0 1 6 20.4L3 22"/><path d="M21 22v-6h-6"/><path d="M3 12a9 9 0 0 1 15-8.4L21 2"/></svg>
+                    </div>
                     <span class="text-sm font-medium uppercase tracking-wider opacity-80">Pants</span>
                     <span id="pants-color-name" class="text-2xl font-bold mt-1">-</span>
                     <span id="pants-type-name" class="text-md font-medium mt-1 opacity-90">-</span>
@@ -132,30 +147,59 @@
                 { name: 'Charcoal', hex: '#4a4a4a', category: 'neutral' },
                 { name: 'Light Grey', hex: '#d1d5db', category: 'neutral-light' },
                 { name: 'White', hex: '#ffffff', category: 'neutral-light' },
+                { name: 'Natural', hex: '#f7f5f1', category: 'neutral-light' },
                 // Earth Tones
                 { name: 'Olive', hex: '#556b2f', category: 'earth' },
                 { name: 'Beige', hex: '#c8ad7f', category: 'earth' },
                 { name: 'Khaki', hex: '#bca98f', category: 'earth' },
                 { name: 'Dark Brown', hex: '#5c4033', category: 'earth' },
-                { name: 'Natural', hex: '#F5F5DC', category: 'neutral-light' },
-                // Muted Tones
+                 // Muted Tones
                 { name: 'Sage Green', hex: '#9dbf9e', category: 'muted' },
                 { name: 'Light Blue', hex: '#a8c5d9', category: 'muted' },
-                { name: 'Taupe', hex: '#8b8589', category: 'muted' },
                 { name: 'Forest Green', hex: '#228B22', category: 'muted' },
-                // Accent Colors
-                { name: 'Maroon', hex: '#800000', category: 'accent' },
+                 // Accent Colors
+                { name: 'Wine', hex: '#722f37', category: 'accent' },
                 { name: 'Burnt Orange', hex: '#cc5500', category: 'accent' },
-                { name: 'Dusty Pink', hex: '#D8A7B1', category: 'accent' }
+                { name: 'Burgundy', hex: '#800020', category: 'accent' },
+                { name: 'Indigo', hex: '#4B0082', category: 'denim' }
             ],
             items: {
-                outerwear: ['Single Breasted Coat', 'Tailored Jacket', 'Utility Jacket', 'Fleece Jacket', 'Puffer Vest', 'Trench Coat', 'Cardigan', 'Corduroy Jacket', 'Windproof Parka'],
-                innerwear: ['Supima Cotton Tee', 'AIRism T-Shirt', 'Heattech Turtleneck', 'Crewneck Sweatshirt', 'Flannel Shirt', 'Merino V-Neck', 'Oxford Shirt', 'Knit Polo', 'Waffle Crew Neck', 'U Crew Neck Tee'],
-                pants: ['Smart Ankle Pants', 'Selvedge Jeans', 'Wide Pleated Trousers', 'Sweatpants', 'Cargo Pants', 'Chinos', 'Corduroy Pants', 'Curved Jeans']
+                outerwear: [
+                    { name: 'Utility Jacket', style: ['casual', 'weekend'] },
+                    { name: 'Fleece Zip Jacket', style: ['casual', 'weekend'] },
+                    { name: 'Windproof Parka', style: ['casual', 'weekend'] },
+                    { name: 'Sweat Pullover Hoodie', style: ['casual', 'weekend'] },
+                    { name: 'Denim Jacket', style: ['smart-casual', 'weekend'] },
+                    { name: 'Merino V-Neck Cardigan', style: ['smart-casual'] },
+                    { name: 'Knit Jacket', style: ['smart-casual'] }
+                ],
+                innerwear: [
+                    { name: 'U Crew Neck Tee', style: ['casual', 'weekend'] },
+                    { name: 'UT Graphic Tee', style: ['casual', 'weekend'] },
+                    { name: 'Sweatshirt', style: ['casual', 'weekend'] },
+                    { name: 'Flannel Shirt', style: ['casual', 'weekend', 'smart-casual'] },
+                    { name: 'Supima Cotton Tee', style: ['smart-casual', 'weekend'] },
+                    { name: 'Dry Pique Polo Shirt', style: ['smart-casual', 'weekend'] },
+                    { name: 'Premium Linen Shirt', style: ['smart-casual', 'weekend'] },
+                    { name: 'Merino Wool Sweater', style: ['smart-casual'] }
+                ],
+                pants: [
+                    { name: 'Cargo Pants', style: ['casual', 'weekend'] },
+                    { name: 'Easy Shorts', style: ['casual', 'weekend'] },
+                    { name: 'Selvedge Jeans', style: ['casual', 'smart-casual', 'weekend'] },
+                    { name: 'Slim-Fit Chinos', style: ['smart-casual', 'weekend'] },
+                    { name: 'Pleated Tapered Pants', style: ['smart-casual']},
+                    { name: 'Smart Ankle Pants', style: ['smart-casual'] }
+                ]
             }
         };
 
-        let lastGeneratedOutfit = null;
+        let lastGeneratedOutfit = {
+            outerwear: { color: {}, item: {} },
+            innerwear: { color: {}, item: {} },
+            pants: { color: {}, item: {} },
+            style: ''
+        };
 
         function getContrastColor(hex) {
             if (!hex) return '#1f2937';
@@ -178,67 +222,140 @@
             const typeEl = document.getElementById(`${category}-type-name`);
             
             card.style.backgroundColor = color.hex;
-            card.style.color = getContrastColor(color.hex);
+            const contrastColor = getContrastColor(color.hex);
+            card.style.color = contrastColor;
+
+            const icon = card.querySelector('.regenerate-icon');
+            if(icon) {
+                 icon.style.color = contrastColor;
+            }
+
             nameEl.textContent = color.name;
             typeEl.textContent = itemType;
         }
 
-        function generatePalette() {
-            // --- 1. SELECT A COORDINATED COLOR PALETTE ---
-            let pantsColor, innerwearColor, outerwearColor;
+        function getValidColors(category, context) {
+            const { style, pantsColor, innerwearColor, outerwearColor } = context;
+            const allColors = wardrobeData.colors;
 
-            pantsColor = getRandomItem(wardrobeData.colors.filter(c => c.category === 'neutral' || c.category === 'earth'));
-
-            const innerwearOptions = wardrobeData.colors.filter(color => {
-                if (pantsColor.category === 'neutral') return true;
-                if (pantsColor.category === 'earth') {
-                    return color.category === 'neutral-light' || color.category === 'muted' || color.category === 'earth';
-                }
-                return true;
-            });
-            innerwearColor = getRandomItem(innerwearOptions.length > 0 ? innerwearOptions : wardrobeData.colors);
-
-            const outerwearOptions = wardrobeData.colors.filter(color => {
-                if (innerwearColor.category === 'accent') {
-                    return color.category === 'neutral' || color.category === 'earth';
-                }
-                if (color.name === pantsColor.name && pantsColor.category !== 'neutral' && color.name === innerwearColor.name) {
-                    return false;
-                }
-                return true;
-            });
-            outerwearColor = getRandomItem(outerwearOptions.length > 0 ? outerwearOptions : wardrobeData.colors);
-             
-            if (pantsColor.name === outerwearColor.name && pantsColor.category !== 'neutral') {
-                let alternatives = outerwearOptions.filter(i => i.name !== pantsColor.name);
-                if (alternatives.length > 0) {
-                    outerwearColor = getRandomItem(alternatives);
-                }
+            // --- PANTS LOGIC ---
+            if (category === 'pants') {
+                return allColors.filter(pColor => {
+                    // Pants are foundational, so they should be neutral, earth, or denim.
+                    if (!['neutral', 'earth', 'denim'].includes(pColor.category)) return false;
+                    
+                    // If innerwear is locked, new pants must harmonize with it.
+                    if (innerwearColor) {
+                        if (innerwearColor.category === 'accent') {
+                            // Accent innerwear needs neutral pants to ground it.
+                            return ['neutral', 'denim'].includes(pColor.category);
+                        }
+                        if (innerwearColor.category === 'muted') {
+                            // Muted innerwear pairs well with neutral, earth, or denim.
+                            return ['neutral', 'earth', 'denim'].includes(pColor.category);
+                        }
+                    }
+                    return true;
+                });
             }
 
-            // --- 2. SELECT A CLOTHING ITEM FOR EACH CATEGORY ---
-            const pantsItem = getRandomItem(wardrobeData.items.pants);
-            const innerwearItem = getRandomItem(wardrobeData.items.innerwear);
-            const outerwearItem = getRandomItem(wardrobeData.items.outerwear);
-            
-            // Store the generated outfit for the Gemini API
-            lastGeneratedOutfit = {
-                outerwear: `${outerwearColor.name} ${outerwearItem}`,
-                innerwear: `${innerwearColor.name} ${innerwearItem}`,
-                pants: `${pantsColor.name} ${pantsItem}`
+            // --- INNERWEAR LOGIC ---
+            if (category === 'innerwear') {
+                return allColors.filter(iColor => {
+                    // If pants are locked, innerwear must harmonize.
+                    if (pantsColor.category === 'neutral' || pantsColor.category === 'denim') return true; // Neutral/denim pants go with anything.
+                    if (pantsColor.category === 'earth') {
+                        // Earth-tone pants pair best with other warm tones or neutrals. Avoid clashing accents.
+                        return ['neutral', 'neutral-light', 'earth', 'muted'].includes(iColor.category);
+                    }
+                    return true;
+                });
+            }
+
+            // --- OUTERWEAR LOGIC ---
+            if (category === 'outerwear') {
+                 return allColors.filter(oColor => {
+                    // If innerwear is a bold accent, outerwear must be neutral/earth to avoid clashing.
+                    if (innerwearColor.category === 'accent') return ['neutral', 'earth', 'denim'].includes(oColor.category);
+                    
+                    // Avoid creating a "sandwich" of two identical, non-neutral colors.
+                    if (oColor.name === pantsColor.name && !['neutral', 'neutral-light'].includes(pantsColor.category)) return false;
+
+                    // Avoid overly bright outerwear for smart-casual looks.
+                    if (style === 'smart-casual' && oColor.category === 'accent') return false;
+                    return true;
+                });
+            }
+
+            return allColors;
+        }
+
+
+        function generatePalette() {
+            // --- 1. DEFINE A STYLE/OCCASION FOR THE DAY ---
+            const styles = ['weekend', 'weekend', 'smart-casual', 'casual', 'casual'];
+            const selectedStyle = getRandomItem(styles);
+            document.getElementById('outfit-style-tag').textContent = selectedStyle.replace('-', ' ');
+            lastGeneratedOutfit.style = selectedStyle;
+
+            // --- 2. SELECT CLOTHING ITEMS THAT FIT THE STYLE ---
+            const validItems = {
+                outerwear: wardrobeData.items.outerwear.filter(item => item.style.includes(selectedStyle)),
+                innerwear: wardrobeData.items.innerwear.filter(item => item.style.includes(selectedStyle)),
+                pants: wardrobeData.items.pants.filter(item => item.style.includes(selectedStyle))
             };
+            
+            const pantsItem = getRandomItem(validItems.pants);
+            const innerwearItem = getRandomItem(validItems.innerwear);
+            const outerwearItem = validItems.outerwear.length > 0 ? getRandomItem(validItems.outerwear) : {name: '(None needed)', style: []};
 
-            // --- 3. UPDATE THE UI ---
-            updateColorCard('outerwear', outerwearColor, outerwearItem);
-            updateColorCard('innerwear', innerwearColor, innerwearItem);
-            updateColorCard('pants', pantsColor, pantsItem);
+            // --- 3. GENERATE A COORDINATED COLOR PALETTE FOR THE ITEMS ---
+            const pantsColor = getRandomItem(getValidColors('pants', {style: selectedStyle}));
+            const innerwearColor = getRandomItem(getValidColors('innerwear', {style: selectedStyle, pantsColor: pantsColor}));
+            const outerwearColor = outerwearItem.name === '(None needed)' ? {name: '', hex: '#f8f9fa'} : getRandomItem(getValidColors('outerwear', {style: selectedStyle, pantsColor: pantsColor, innerwearColor: innerwearColor}));
 
-            // --- 4. PREPARE GEMINI FEATURE ---
+            // --- 4. STORE AND UPDATE UI ---
+            lastGeneratedOutfit.pants = { color: pantsColor, item: pantsItem };
+            lastGeneratedOutfit.innerwear = { color: innerwearColor, item: innerwearItem };
+            lastGeneratedOutfit.outerwear = { color: outerwearColor, item: outerwearItem };
+
+            updateColorCard('outerwear', outerwearColor, outerwearItem.name);
+            updateColorCard('innerwear', innerwearColor, innerwearItem.name);
+            updateColorCard('pants', pantsColor, pantsItem.name);
+            
             const geminiButton = document.getElementById('gemini-button');
             const geminiResponseArea = document.getElementById('gemini-response-area');
             geminiButton.classList.remove('hidden');
             geminiButton.disabled = false;
             geminiResponseArea.classList.add('hidden');
+        }
+
+        function regenerateCard(category) {
+            const { style } = lastGeneratedOutfit;
+            
+            const validItems = wardrobeData.items[category].filter(item => item.style.includes(style));
+            let newItem = getRandomItem(validItems);
+            
+            let newColor;
+            
+            if (category === 'outerwear') {
+                if (validItems.length === 0) newItem = {name: '(None needed)', style: []};
+                 newColor = newItem.name === '(None needed)' ? {name: '', hex: '#f8f9fa'} : getRandomItem(getValidColors('outerwear', {style, pantsColor: lastGeneratedOutfit.pants.color, innerwearColor: lastGeneratedOutfit.innerwear.color}));
+                 lastGeneratedOutfit.outerwear = { color: newColor, item: newItem };
+                 updateColorCard('outerwear', newColor, newItem.name);
+            } else if (category === 'innerwear') {
+                 newColor = getRandomItem(getValidColors('innerwear', {style, pantsColor: lastGeneratedOutfit.pants.color, outerwearColor: lastGeneratedOutfit.outerwear.color}));
+                 lastGeneratedOutfit.innerwear = { color: newColor, item: newItem };
+                 updateColorCard('innerwear', newColor, newItem.name);
+            } else if (category === 'pants') {
+                 newColor = getRandomItem(getValidColors('pants', {style, innerwearColor: lastGeneratedOutfit.innerwear.color, outerwearColor: lastGeneratedOutfit.outerwear.color}));
+                 lastGeneratedOutfit.pants = { color: newColor, item: newItem };
+                 updateColorCard('pants', newColor, newItem.name);
+            }
+
+            // Reset Gemini tip
+            document.getElementById('gemini-response-area').classList.add('hidden');
+            document.getElementById('gemini-button').disabled = false;
         }
 
         async function getStyleTip() {
@@ -249,20 +366,24 @@
             const responseText = document.getElementById('gemini-response-text');
 
             geminiButton.disabled = true;
-            responseText.textContent = '✨ Thinking...';
+            responseText.textContent = '✨ Getting style advice...';
             responseArea.classList.remove('hidden');
 
-            const systemPrompt = "You are a friendly, encouraging fashion advisor specializing in casual, Uniqlo-style outfits. Your advice is concise, positive, and helpful.";
-            const userQuery = `I'm wearing a ${lastGeneratedOutfit.outerwear}, a ${lastGeneratedOutfit.innerwear}, and ${lastGeneratedOutfit.pants}. Can you give me a short style tip? Describe the vibe of the outfit, what occasion it's good for, and suggest one type of accessory or footwear. Keep it to 2-3 sentences.`;
+            const outfitSummary = {
+                outerwear: lastGeneratedOutfit.outerwear.item.name === '(None needed)' ? 'no specific outerwear' : `${lastGeneratedOutfit.outerwear.color.name} ${lastGeneratedOutfit.outerwear.item.name}`,
+                innerwear: `${lastGeneratedOutfit.innerwear.color.name} ${lastGeneratedOutfit.innerwear.item.name}`,
+                pants: `${lastGeneratedOutfit.pants.color.name} ${lastGeneratedOutfit.pants.item.name}`
+            };
 
-            const apiKey = ""; // This will be handled by the execution environment.
+            const systemPrompt = "You are a friendly, encouraging fashion advisor specializing in casual, Uniqlo-style outfits. Your advice is concise, positive, and helpful. You always focus on the overall 'vibe'.";
+            const userQuery = `My outfit today is for a '${lastGeneratedOutfit.style}' occasion. I'm wearing: ${outfitSummary.innerwear} and ${outfitSummary.pants}, with ${outfitSummary.outerwear}. Can you give me a short style tip? Describe the vibe, confirm what occasion it's good for, and recommend one type of footwear. Keep it to 2-3 sentences.`;
+
+            const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             const payload = {
                 contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: {
-                    parts: [{ text: systemPrompt }]
-                },
+                systemInstruction: { parts: [{ text: systemPrompt }] },
             };
 
             try {
@@ -272,9 +393,7 @@
                     body: JSON.stringify(payload)
                 });
 
-                if (!response.ok) {
-                    throw new Error(`API call failed with status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`API call failed: ${response.status}`);
 
                 const result = await response.json();
                 const candidate = result.candidates?.[0];
@@ -286,28 +405,49 @@
                 }
             } catch (error) {
                 console.error("Error calling Gemini API:", error);
-                responseText.textContent = "An error occurred. Please check the console and try again later.";
+                responseText.textContent = "An error occurred. Please try again later.";
             } finally {
                 geminiButton.disabled = false;
             }
         }
 
-
         function populateWardrobeGuide() {
-            // Populate Essential Items
             for (const category in wardrobeData.items) {
                 const listElement = document.getElementById(`${category}-items-list`);
                 if (listElement) {
                     listElement.innerHTML = '';
+                     const itemsByStyle = {};
                     wardrobeData.items[category].forEach(item => {
-                        const li = document.createElement('li');
-                        li.textContent = item;
-                        listElement.appendChild(li);
+                        item.style.forEach(styleName => {
+                            const style = styleName.replace('-', ' ');
+                            if (!itemsByStyle[style]) {
+                                itemsByStyle[style] = [];
+                            }
+                            if (!itemsByStyle[style].includes(item.name)) {
+                                itemsByStyle[style].push(item.name);
+                            }
+                        });
+                    });
+                    
+                    const styleOrder = ['casual', 'weekend', 'smart casual'];
+                    styleOrder.forEach(style => {
+                        if (itemsByStyle[style]) {
+                            const styleHeader = document.createElement('div');
+                            styleHeader.className = 'font-medium text-gray-500 text-sm mt-2 capitalize';
+                            styleHeader.textContent = style;
+                            listElement.appendChild(styleHeader);
+
+                            itemsByStyle[style].forEach(itemName => {
+                                const li = document.createElement('li');
+li.className = "ml-2";
+                                li.textContent = itemName;
+                                listElement.appendChild(li);
+                            });
+                        }
                     });
                 }
             }
 
-            // Populate Essential Colors
             const colorsListElement = document.getElementById('colors-list');
             if(colorsListElement) {
                 colorsListElement.innerHTML = '';
@@ -323,7 +463,6 @@
             }
         }
         
-        // Initial setup when the page loads
         window.onload = () => {
             generatePalette();
             populateWardrobeGuide();
